@@ -1,0 +1,15 @@
+# Data files
+data/
+*.csv
+
+# Model/artifact files
+artifacts/
+*.pkl
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS / IDE stuff
+*.pyc
+__pycache__/
+.DS_StoreECHO is on.

@@ -1,0 +1,2 @@
+created new conda env : recsys310
+created new terminal, added it into jupyter, choose terminal on jupyter as "Recsys Python 3.10"

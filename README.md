@@ -1,8 +1,9 @@
 # Book Recommendation System
 
 ## Overview
-This project implements an **item-based collaborative filtering recommender system** for books using Python.  
-It predicts user preferences and suggests books based on similar users’ ratings, and is evaluated using **Precision@K** and **Recall@K**.
+This project implements a **hybrid book recommender system** using Python.  
+It combines **popularity-based recommendations**, **item-based collaborative filtering (KNN)**, and **matrix factorization (SVD)** to suggest books to users.  
+The system predicts user preferences and is evaluated using **Precision@K** and **Recall@K**.
 
 ---
 
@@ -14,21 +15,23 @@ It predicts user preferences and suggests books based on similar users’ rating
   - Train/test split for evaluation
   - Construct user-book pivot matrix
   - Convert to sparse matrix for memory efficiency
-- **Recommendation Model**
-  - Item-based K-Nearest Neighbors (KNN) using user ratings
-  - Compute similarity between books
-  - Recommend top-N books based on a seed book
+- **Recommendation Models**
+  - **Popularity-Based**: Recommend most popular books
+  - **Item-Based KNN**: Compute similarity between books
+  - **SVD (Matrix Factorization)**: Predict ratings using latent features
+  - **Hybrid**: Combine multiple models for improved recommendations
 - **Evaluation**
-  - Compute Precision@K and Recall@K per user
+  - Compute **Precision@K** and **Recall@K** per user
   - Handles sparse datasets and thresholds for liked books
 
 ---
 
 ## Technologies Used
-- Python
-- Pandas, NumPy — data manipulation
-- Scikit-learn — KNN modeling
-- SciPy — sparse matrix computation
+- Python  
+- Pandas, NumPy — data manipulation  
+- Scikit-learn — KNN modeling  
+- Surprise — SVD matrix factorization  
+- SciPy — sparse matrix computation  
 
 ---
 
@@ -37,12 +40,9 @@ It predicts user preferences and suggests books based on similar users’ rating
 # Convert pivot table to sparse matrix
 book_sparse = csr_matrix(book_pivot)
 
-# Recommend books similar to a seed book
+# Recommend books using different models
 seed_book = "1984"
-recommendations = recommend_books(seed_book, n=5)
-print(recommendations)
-
-# Evaluate model
-precision, recall = precision_recall_at_k(k=5, threshold=8)
-print("Precision@5:", precision)
-print("Recall@5:", recall)
+print("KNN Recommendations:", recommend_books_knn(seed_book=seed_book, n_suggestions=5, ))
+print("SVD Recommendations:", recommend_svd(user_id="276725", n_suggestions=5))
+print("Popularity Recommendations:", recommend_books_popular(n_suggestions=5))
+print("Hybrid Recommendations:", rec_books = hybrid_recommend(user_id="276725", n_suggestions=5))

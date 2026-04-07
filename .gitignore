@@ -5,6 +5,7 @@ data/
 # Model/artifact files
 artifacts/
 *.pkl
+*.joblib
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
